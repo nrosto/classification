@@ -1,0 +1,18 @@
+.Image{
+  width: 1096px;
+  height: 960px;
+  overflow: hidden;
+}
+
+.container {
+  display: flex;
+}
+
+.imageColumn {
+  flex: 2;
+}
+
+.textColumn {
+  flex: 1;
+  background-color: aqua;
+}
