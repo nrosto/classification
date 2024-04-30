@@ -28,7 +28,6 @@ export default function Home() {
     console.log(inputTensor)
 
     const result = await model.predict(inputTensor);
-    console.log(result);
     const predictions = result.dataSync();
     
     const probabilityClass1 = predictions[0];
@@ -58,8 +57,8 @@ export default function Home() {
         {prediction && (
             <div className='Prediction'>
                 <h2>Результат классификации:</h2>
-                <p>Вероятность Надмолекулярная структура: {prediction.class1}</p>
-                <p>Вероятность Поверхность Трения: {prediction.class2}</p>
+                <p>Надмолекулярная структура: {prediction.class1}</p>
+                <p>Поверхность трения: {prediction.class2}</p>
             </div>
         )}
       </div>
