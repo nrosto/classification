@@ -18,14 +18,22 @@ export default function Home() {
     await tf.ready();
     const model = await tf.loadGraphModel('http://127.0.0.1:8080/model.json');
     // const model = await tf.loadGraphModel('https://raw.githubusercontent.com/nrosto/classification/main/frontend/model/model_2_classes/model.json');
-    const result = await model.predict(tf.browser.fromPixels(imageElement).resizeNearestNeighbor([IMG_SIZE, IMG_SIZE]).toFloat().div(tf.scalar(255)).expandDims());
-    const predictions = Array.from(result.dataSync());
+
+    const inputTensor = await tf.browser.fromPixels(imageElement, 3)
+      .resizeNearestNeighbor([IMG_SIZE, IMG_SIZE])
+      .toFloat()
+      .div(tf.scalar(255))
+      .expandDims();
     
-    // Определяем вероятности для каждого класса
+    console.log(inputTensor)
+
+    const result = await model.predict(inputTensor);
+    console.log(result);
+    const predictions = result.dataSync();
+    
     const probabilityClass1 = predictions[0];
     const probabilityClass2 = predictions[1];
 
-    // Устанавливаем вероятности в состояние компонента
     setPrediction({ class1: probabilityClass1, class2: probabilityClass2 });
 };
 
@@ -50,8 +58,8 @@ export default function Home() {
         {prediction && (
             <div className='Prediction'>
                 <h2>Результат классификации:</h2>
-                <p>Вероятность Class 1: {prediction.class1}</p>
-                <p>Вероятность Class 2: {prediction.class2}</p>
+                <p>Вероятность Надмолекулярная структура: {prediction.class1}</p>
+                <p>Вероятность Поверхность Трения: {prediction.class2}</p>
             </div>
         )}
       </div>

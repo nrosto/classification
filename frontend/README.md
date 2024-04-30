@@ -6,6 +6,7 @@ First, run the development server:
 
 ```bash
 npm run dev
+http-server --cors
 # or
 yarn dev
 # or
