@@ -5,7 +5,12 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 First, run the development server:
 
 ```bash
+# Установка всего нужного
+npm i
+# Запуск фронта для 1-ого терминала
 npm run dev
+# Загрузка модели на бекенд для 2-ого терминала
+cd .\frontend\model\
 http-server --cors
 # or
 yarn dev
