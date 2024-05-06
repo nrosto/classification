@@ -79,8 +79,8 @@ export default function Home() {
             {prediction.length === 2 &&
             (
               <div>
-                <p>Надмолекулярная структура: {prediction[0]}</p>
-                <p>Поверхность трения: {prediction[1]}</p>
+                <p>Надмолекулярная структура: {prediction[0].toFixed(2)*100}%</p>
+                <p>Поверхность трения: {prediction[1].toFixed(2)*100}%</p>
               </div>
             )
             }
