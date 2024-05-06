@@ -40,11 +40,9 @@ export default function Home() {
     const imageElement = document.createElement('img');
     imageElement.src = selectedImage;
 
-    const inputTensor = await tf.browser.fromPixels(imageElement, 3)
-      .resizeNearestNeighbor([IMG_SIZE, IMG_SIZE])
-      .toFloat()
-      .div(tf.scalar(255))
-      .expandDims();
+    const pixels = tf.browser.fromPixels(imageElement, 3);
+    const resizedPixels = tf.image.resizeBilinear(pixels, [IMG_SIZE, IMG_SIZE]);
+    const inputTensor = resizedPixels.expandDims();
 
       let result;
       if (numClasses === 2) {
