@@ -15,8 +15,6 @@ export default function Home() {
       try {
         const loadedModel1 = await tf.loadGraphModel('http://127.0.0.1:8080/model_2_classes/model.json');
         const loadedModel2 = await tf.loadGraphModel('http://127.0.0.1:8080/model_4_classes/model.json');
-        // const loadmodel1 = await tf.loadGraphModel('https://raw.githubusercontent.com/nrosto/classification/main/frontend/model/model_2_classes/model.json');
-        // const loadmodel2 = await tf.loadGraphModel('https://raw.githubusercontent.com/nrosto/classification/main/frontend/model/model_4_classes/model.json');
         setModel1(loadedModel1);
         setModel2(loadedModel2);
       } catch (error) {
@@ -52,7 +50,7 @@ export default function Home() {
       }
     const predictions = result.dataSync();
     
-    const formattedPredictions = predictions.map(probability => probability.toFixed(2));
+    const formattedPredictions = predictions.map(probability => probability);
     setPrediction(formattedPredictions);
   };
 
@@ -89,10 +87,10 @@ export default function Home() {
             {prediction.length === 4 && 
             (
               <div>
-                <p>ПТФЭ Надмолекулярная: {prediction[0]}</p>
-                <p>СВМПЭ Поверхности: {prediction[1]}</p>
-                <p>ПТФЭ Поверхности: {prediction[2]}</p>
-                <p>СВМПЭ Надмолекулярная: {prediction[3]}</p>
+                <p>ПТФЭ Надмолекулярная: {prediction[0].toFixed(2)*100}%</p>
+                <p>СВМПЭ Поверхности: {prediction[1].toFixed(2)*100}%</p>
+                <p>ПТФЭ Поверхности: {prediction[2].toFixed(2)*100}%</p>
+                <p>СВМПЭ Надмолекулярная: {prediction[3].toFixed(2)*100}%</p>
               </div>
             )
             }
